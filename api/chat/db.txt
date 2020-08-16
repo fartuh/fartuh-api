@@ -1,0 +1,1 @@
+CREATE TABLE `fartuh`.`messages` ( `id` INT NOT NULL AUTO_INCREMENT, `text` TEXT NOT NULL , `author_id` INT NOT NULL , `sent_at` VARCHAR(20) NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`author_id`) REFERENCES users(id)) ENGINE = InnoDB;
