@@ -24,17 +24,21 @@ class Controller
 
         if(isset($data['id'])){
             $db = DB::getVar();
-            $stmt = $db->prepare("SELECT * FROM messages WHERE id = ?");
+            $stmt = $db->prepare("SELECT messages.id,messages.text,messages.sent_at,users.login FROM messages INNER JOIN users ON messages.author_id = users.id WHERE messages.id = ?");
             $stmt->execute([trim($data['id'])]);
 
             $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            echo json_encode($data);
+            if($data == false){
+                echo json_encode(['result' => 'false', 'error' => 'not enough data', 'errorcode' => '5']);
+            }else{
+                echo json_encode($data);
+            }
 
         }
         else{
             $db = DB::getVar();
-            $stmt = $db->prepare("SELECT * FROM messages");
+            $stmt = $db->prepare("SELECT messages.id,messages.text,messages.sent_at,users.login FROM messages INNER JOIN users ON messages.author_id = users.id ORDER BY messages.id DESC LIMIT 10");
             $stmt->execute();
 
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -67,7 +71,7 @@ class Controller
 
     private function check($data){
         if(!isset($data['login']) || !isset($data['password'])){
-            echo json_encode(['result' => 'false']);
+            echo json_encode(['result' => 'false', 'error' => 'not enough data', 'errorcode' => '5']);
             exit();
         }
 
@@ -79,7 +83,7 @@ class Controller
         $res = $stmt->execute([$login]);
 
         if($res != true){
-            echo json_encode(['result' => 'false', 'error' => 'incorrect login or password']);
+            echo json_encode(['result' => 'false', 'error' => 'incorrect login or password', 'errorcode' => '3']);
             exit();
         }
 
@@ -90,7 +94,7 @@ class Controller
         $check = password_verify($password, $pass_hash);
 
         if($check != true){
-            echo json_encode(['result' => 'false', 'error' => 'incorrect login or password']);
+            echo json_encode(['result' => 'false', 'error' => 'incorrect login or password', 'errorcode' => '3']);
             exit();
         }
 

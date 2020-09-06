@@ -27,7 +27,11 @@ class Controller
 
             $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            echo json_encode($data);
+            if($data == false){
+                echo json_encode(['result' => 'false', 'error' => 'id does not exist', 'errorcode' => '4']);
+            }else{
+                echo json_encode($data);
+            }
 
         }
         else{
@@ -36,12 +40,8 @@ class Controller
             $stmt->execute();
 
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            var_dump($data);
 
-            if(!isset($data[0]) == false)
-                echo json_encode(['result' => 'false']);
-            else
-                echo json_encode($data);
+            echo json_encode($data);
         }
     }
 
