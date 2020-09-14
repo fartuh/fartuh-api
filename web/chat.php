@@ -25,7 +25,7 @@ if(isset($_POST['message']) && $_POST['message'] != ""){
 $login = $_SESSION['login'];
 $password = $_COOKIE['password'];
 
-$messages = json_decode(file_get_contents("https://fartuh.xyz/api/chat?login=$login&password=$password"));
+$messages = array_reverse(json_decode(file_get_contents("https://fartuh.xyz/api/chat?login=$login&password=$password")));
 
 ?>
 <!DOCTYPE html>
@@ -42,14 +42,15 @@ $messages = json_decode(file_get_contents("https://fartuh.xyz/api/chat?login=$lo
         <a href="https://fartuh.xyz/web/logout.php">Выйти</a>
     </header>
     <div class="box">
+        <?php foreach($messages as $message): ?>
+            <p><?= $message->login . ": " . $message->text . ": " . $message->sent_at ?></p>
+        <?php endforeach; ?>
+
         <form action="https://fartuh.xyz/web/chat.php" method="POST">
             <input type="text" name="message" placeholder="Текст сообщения..." required>
             <input type="submit" value="Отправить сообщение">
             <input onclick="reload()" type="button" value="Обновить чат">
         </form>
-        <?php foreach($messages as $message): ?>
-            <p><?= $message->login . ": " . $message->text . ": " . $message->sent_at ?></p>
-        <?php endforeach; ?>
     </div>
     <footer>
 

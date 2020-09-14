@@ -27,17 +27,20 @@ Author's email: nikitafartuh@ukr.net
             <li><a href="https://fartuh.xyz">Главная</a></li>
             <li><a href="https://t.me/fartuh">Телеграм</a></li>
             <li><a href="https://fartuh.xyz/api/">API</a></li>
+            <li><a href="https://fartuh.xyz/web/">Чат</a></li>
         </ul>
 
     </header>
     
     <div class="content">
         <h2>Что такое Fartuh?</h2>
-        <p>Fartuh - это консольный чат, работающий на Python 3</p>
+        <p>Fartuh - это чат, работающий на Python 3 и в браузере</p>
         <h2>Скачать</h2>
-        <a class="download" download href="https://github.com/winzmcman/fartuh-chat/archive/master.zip">Последняя версия fartuh-chat</a>
+        <a class="download" download href="https://github.com/winzmcman/fartuh-chat/archive/master.zip"><p>Последняя версия fartuh-chat</p></a>
         <h2>Как пользоваться клиентом?</h2>
         <p>После скачивания, запустите файл main.py с помощью Python версии 3.6 и выше. После, вам будет предложено войти или зарегистрироваться, а затем вы попадете в чат</p>
+        <h2>Как воспользоваться браузерной версией?</h2>
+        <p>В правом верхнем углу нажмите "Чат"</p>
     </div>
 
     <footer>
