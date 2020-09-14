@@ -23,7 +23,7 @@ if(isset($_POST['login']) && isset($_POST['password'])){
         exit();
     }
     else{
-        echo $res->error;
+        echo "<script>alert('$res->error')</script>";
     }
 }
 
@@ -33,13 +33,21 @@ if(isset($_POST['login']) && isset($_POST['password'])){
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/login.css">
+    <title>Онлайн чат fartuh</title>
 </head>
 <body>
-    <form action="https://fartuh.xyz/web/login.php" method="POST">
-        <label>Логин<input type="text" name="login"></label>
-        <label>Пароль<input type="text" name="password"></label>
+    <header>
+        <a href="https://fartuh.xyz">Главная</a>
+    </header>
+
+    <form class="box" action="https://fartuh.xyz/web/login.php" method="POST">
+        <h1>Войти</h1>
+        <input type="text" name="login" placeholder="Логин" required>
+        <input type="text" name="password" placeholder="Пароль" required>
         <input type="submit">
+        <p>*Для регистрации придумайте логин и пароль, а для входа введите существующие</p>
     </form>
 </body>
 </html>

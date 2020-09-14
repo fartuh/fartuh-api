@@ -29,19 +29,21 @@ $messages = json_decode(file_get_contents("https://fartuh.xyz/api/chat?login=$lo
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="assets/chat.css">
+    <title>Чат fartuh.xyz</title>
 </head>
 <body>
     <header>
-
-    <a href="https://fartuh.xyz/web/logout.php">Выйти</a>
+        <a href="https://fartuh.xyz">Главная</a>
+        <a href="https://fartuh.xyz/web/logout.php">Выйти</a>
     </header>
-    <div>
+    <div class="box">
         <form action="https://fartuh.xyz/web/chat.php" method="POST">
-            <input type="text" name="message">
+            <input type="text" name="message" placeholder="Текст сообщения..." required>
             <input type="submit" value="Отправить сообщение">
             <input onclick="reload()" type="button" value="Обновить чат">
         </form>
