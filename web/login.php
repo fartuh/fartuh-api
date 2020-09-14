@@ -18,6 +18,7 @@ if(isset($_POST['login']) && isset($_POST['password'])){
 
     if($res->result == true){
         $_SESSION['login'] = trim($_POST['login']);
+        setcookie('password', trim($_POST['password']), time()+60*60*24*326);
         header("Location: https://fartuh.xyz/web/");
         exit();
     }
