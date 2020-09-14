@@ -11,7 +11,9 @@ Author's email: nikitafartuh@ukr.net
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" name="keywords" content="Консольный чат, чат, python, пайтон, фартух">
+    <meta charset="UTF-8" name="description" content="fartuh.xyz - это консольный чат, работающий на Python 3">
+    <meta name="google-site-verification" content="VhEIPYEJR5YMhCMIBcycAhgKPE9a-P8i4MPkQE9alOQ" />
     <title>fartuh - консольный чат</title>
     <link rel="stylesheet" href="pages/assets/index/main.css">
 
