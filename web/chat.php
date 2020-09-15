@@ -27,12 +27,15 @@ $password = $_COOKIE['password'];
 
 $messages = array_reverse(json_decode(file_get_contents("https://fartuh.xyz/api/chat?login=$login&password=$password")));
 
+$count = 9;
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <link rel="stylesheet" href="assets/chat.css">
     <title>Чат fartuh.xyz</title>
 </head>
@@ -43,22 +46,38 @@ $messages = array_reverse(json_decode(file_get_contents("https://fartuh.xyz/api/
     </header>
     <div class="box">
         <?php foreach($messages as $message): ?>
-            <p><?= $message->login . ": " . $message->text . ": " . $message->sent_at ?></p>
+            <p id="msg<?= $count ?>"><?= $message->login . ": " . $message->text . ": " . $message->sent_at ?></p>
+            <?php $count -= 1 ?>
         <?php endforeach; ?>
 
         <form action="https://fartuh.xyz/web/chat.php" method="POST">
-            <input type="text" name="message" placeholder="Текст сообщения..." required>
-            <input type="submit" value="Отправить сообщение">
-            <input onclick="reload()" type="button" value="Обновить чат">
+            <input id="message" type="text" name="message" placeholder="Текст сообщения..." required>
+            <input onclick="sent()" type="button" value="Отправить сообщение">
         </form>
     </div>
     <footer>
 
     </footer>
 </body>
+<script src="assets/jquery.min.js"></script>
 <script>
-function reload(){
-    window.location.reload();
+function update(){
+    jQuery.get("https://fartuh.xyz/api/chat?login=<?= $_SESSION['login'] ?>&password=<?= $_COOKIE['password']?>", function(data, status){
+        data = JSON.parse(data);
+        for(i = 0; i <= 9; i++){
+            msg = document.getElementById("msg" + i);
+            msg.innerHTML = data[i].login + ": " + data[i].text + ": " + data[i].sent_at;
+        }
+}); 
 }
+setInterval(update, 2000);
+
+function sent(){
+    jQuery.post("https://fartuh.xyz/api/chat/index.php", {login: "<?= $_SESSION['login']?>", password: "<?= $_COOKIE['password']?>", text: document.getElementById("message").value}, function(data, status){
+        update();
+        document.getElementById("message").value = "";
+});
+}
+
 </script>
 </html>

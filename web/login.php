@@ -43,10 +43,10 @@ if(isset($_POST['login']) && isset($_POST['password'])){
     </header>
 
     <form class="box" action="https://fartuh.xyz/web/login.php" method="POST">
-        <h1>Войти</h1>
+        <h1>Вход</h1>
         <input type="text" name="login" placeholder="Логин" required>
         <input type="text" name="password" placeholder="Пароль" required>
-        <input type="submit">
+        <input type="submit" value="Войти">
         <p>*Для регистрации придумайте логин и пароль, а для входа введите существующие</p>
     </form>
 </body>
