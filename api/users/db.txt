@@ -8,5 +8,5 @@ Author's email: nikitafartuh@ukr.net
 
 This is a structure of the table users
 
-CREATE TABLE IF NOT EXISTS `users` (`id` INT NOT NULL AUTO_INCREMENT,`login` varchar(20) NOT NULL UNIQUE,`status` varchar(20) NOT NULL,`password` text NOT NULL,`reg_ip` varchar(30) NOT NULL, PRIMARY KEY(`id`)
+CREATE TABLE IF NOT EXISTS `users` (`id` INT NOT NULL AUTO_INCREMENT,`login` varchar(20) NOT NULL UNIQUE,`status` varchar(20) NOT NULL,`password` text NOT NULL,`reg_ip` varchar(30) NOT NULL, lastvisit varchar(30), PRIMARY KEY(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -80,8 +80,10 @@ class Controller
                 exit();
             }
 
-            $stmt = $db->prepare("INSERT INTO users VALUES(null, ?, ?, ?, ?)");
-            $res = $stmt->execute([$login, $status, $password, $reg_ip]);
+            date_default_timezone_set('Europe/Moscow');
+
+            $stmt = $db->prepare("INSERT INTO users VALUES(null, ?, ?, ?, ?, ?)");
+            $res = $stmt->execute([$login, $status, $password, $reg_ip, time()/*date("m.d.y H:i:s")*/]);
 
             echo json_encode(['result' => $res]);
 
