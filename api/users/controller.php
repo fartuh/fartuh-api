@@ -28,7 +28,7 @@ class Controller
             $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if($data == false){
-                echo json_encode(['result' => 'false', 'error' => 'id does not exist', 'errorcode' => '4']);
+                echo json_encode(['result' => 'false', 'error' => 'Такого id не существует', 'errorcode' => '4']);
             }else{
                 echo json_encode($data);
             }
@@ -57,7 +57,7 @@ class Controller
             $password = trim($data['password']);
 
             if(strlen($password) < 6){
-                echo json_encode(["result" => false, 'error' => "password is too short", "errorcode" => "1"]);
+                echo json_encode(["result" => false, 'error' => "Пароль слишком короткий", "errorcode" => "1"]);
                 exit();
             }
 
@@ -72,7 +72,7 @@ class Controller
             if(isset($result['id'])){
                 $r = $this->check($data);
                 if($r == false){
-                    echo json_encode(['result' => false, 'error' => 'User already registered', 'errorcode' => '2']);
+                    echo json_encode(['result' => false, 'error' => 'Такой пользователь уже зарегистрирован (неправильный пароль)', 'errorcode' => '2']);
                 }
                 else{
                     echo json_encode(['result' => true]);
@@ -91,7 +91,7 @@ class Controller
     }
     private function check($data){
         if(!isset($data['login']) || !isset($data['password'])){
-            echo json_encode(['result' => 'false', 'error' => 'not enough data', 'errorcode' => '5']);
+            echo json_encode(['result' => 'false', 'error' => 'Не все поля заполнены', 'errorcode' => '5']);
             exit();
         }
 

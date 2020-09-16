@@ -64,7 +64,7 @@ $count = 9;
 <script src="assets/jquery.min.js"></script>
 <script>
 function update(){
-    jQuery.get("https://fartuh.xyz/api/chat?login=<?= $_SESSION['login'] ?>&password=<?= $_COOKIE['password']?>", function(data, status){
+    jQuery.get("https://fartuh.xyz/api/chat?login=<?= $_COOKIE['login'] ?>&password=<?= $_COOKIE['password']?>", function(data, status){
         data = JSON.parse(data);
         for(i = 0; i <= data.length - 1; i++){
             msg = document.getElementById("msg" + i);
@@ -88,7 +88,7 @@ setInterval(update, 2000);
 setInterval(online, 4000);
 
 function sent(){
-    jQuery.post("https://fartuh.xyz/api/chat/index.php", {login: "<?= $_SESSION['login']?>", password: "<?= $_COOKIE['password']?>", text: document.getElementById("message").value}, function(data, status){
+    jQuery.post("https://fartuh.xyz/api/chat/index.php", {login: "<?= $_COOKIE['login']?>", password: "<?= $_COOKIE['password']?>", text: document.getElementById("message").value}, function(data, status){
         update();
         document.getElementById("message").value = "";
 });
