@@ -1,6 +1,5 @@
 <?php
 
-session_start();
 if(isset($_SESSION['login'])){
     header("Location: https://fartuh.xyz/web");
     exit();
@@ -17,8 +16,8 @@ if(isset($_POST['login']) && isset($_POST['password'])){
     $res = json_decode($responde);
 
     if($res->result == true){
-        $_SESSION['login'] = trim($_POST['login']);
-        setcookie('password', trim($_POST['password']), time()+60*60*24*326);
+        setcookie('login', trim($_POST['login']), time()+60*60*24*14);
+        setcookie('password', trim($_POST['password']), time()+60*60*24*326*14);
         header("Location: https://fartuh.xyz/web/");
         exit();
     }

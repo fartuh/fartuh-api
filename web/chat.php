@@ -1,11 +1,11 @@
 <?php
 
-session_start();
+
 
 if(isset($_POST['message']) && $_POST['message'] != ""){
     $curl = curl_init("https://fartuh.xyz/api/chat/index.php");
     curl_setopt($curl, CURLOPT_POST, true);
-    curl_setopt($curl, CURLOPT_POSTFIELDS, ['login' => trim($_SESSION['login']),'password' => trim($_COOKIE['password']), 'text' => trim($_POST['message'])]);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, ['login' => trim($_COOKIE['login']),'password' => trim($_COOKIE['password']), 'text' => trim($_POST['message'])]);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
     $responde = curl_exec($curl);
@@ -22,7 +22,7 @@ if(isset($_POST['message']) && $_POST['message'] != ""){
 
 }
 
-$login = $_SESSION['login'];
+$login = $_COOKIE['login'];
 $password = $_COOKIE['password'];
 
 $messages = array_reverse(json_decode(file_get_contents("https://fartuh.xyz/api/chat?login=$login&password=$password")));
