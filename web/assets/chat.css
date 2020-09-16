@@ -56,6 +56,11 @@ body{
     color: white;
 }
 
+.chat{
+    border: 1px solid aqua;
+    padding: 2px;
+}
+
 header{
     min-width: 100%;
     background-color: white;

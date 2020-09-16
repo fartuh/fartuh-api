@@ -47,7 +47,7 @@ if(isset($_POST['login']) && isset($_POST['password'])){
         <input type="text" name="login" placeholder="Логин" required>
         <input type="text" name="password" placeholder="Пароль" required>
         <input type="submit" value="Войти">
-        <p>*Для регистрации придумайте логин и пароль, а для входа введите существующие</p>
+        <p>*Для регистрации придумайте логин и пароль (не меньше 6 символов), а для входа введите существующие.</p>
     </form>
 </body>
 </html>

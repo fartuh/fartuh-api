@@ -43,6 +43,10 @@ class Controller
             $stmt = $db->prepare("SELECT messages.id,messages.text,messages.sent_at,users.login FROM messages INNER JOIN users ON messages.author_id = users.id ORDER BY messages.id DESC LIMIT 10");
             $stmt->execute();
 
+            $stmt2 = $db->prepare("UPDATE users SET lastvisit = ? WHERE id = ?");
+            $stmt2->execute([time(), $user]);
+
+
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             echo json_encode($data);
@@ -64,9 +68,6 @@ class Controller
             $sent_at = date("H:i");
 
             $stmt = $db->prepare("INSERT INTO messages VALUES(null, ?, ?, ?)");
-
-            $stmt2 = $db->prepare("UPDATE users SET lastvisit = ? WHERE id = ?");
-            $stmt2->execute([time(), $author]);
 
             $res = $stmt->execute([$text, $author, $sent_at]);
 

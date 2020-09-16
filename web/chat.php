@@ -45,12 +45,14 @@ $count = 9;
         <a href="https://fartuh.xyz/web/logout.php">Выйти</a>
     </header>
     <div class="box">
-        <?php foreach($messages as $message): ?>
-            <p id="msg<?= $count ?>"><?= $message->login . ": " . $message->text . ": " . $message->sent_at ?></p>
-            <?php $count -= 1 ?>
-        <?php endforeach; ?>
-
-        <form action="https://fartuh.xyz/web/chat.php" method="POST">
+        <p class="online">Онлайн пользователей: 0</p>
+        <div class="chat">
+            <?php foreach($messages as $message): ?>
+                <p id="msg<?= $count ?>"><b><?= $message->login . "</b>: " . $message->text . ": " . $message->sent_at ?></p>
+                <?php $count -= 1 ?>
+            <?php endforeach; ?>
+        </div>
+        <form action="#" method="POST">
             <input id="message" type="text" name="message" placeholder="Текст сообщения..." required>
             <input onclick="sent()" type="button" value="Отправить сообщение">
         </form>
@@ -64,13 +66,26 @@ $count = 9;
 function update(){
     jQuery.get("https://fartuh.xyz/api/chat?login=<?= $_SESSION['login'] ?>&password=<?= $_COOKIE['password']?>", function(data, status){
         data = JSON.parse(data);
-        for(i = 0; i <= 9; i++){
+        for(i = 0; i <= data.length - 1; i++){
             msg = document.getElementById("msg" + i);
-            msg.innerHTML = data[i].login + ": " + data[i].text + ": " + data[i].sent_at;
+            msg.innerHTML = "<b>" + data[i].login + "</b>: " + data[i].text + ": " + data[i].sent_at;
         }
+
 }); 
 }
+
+function online(){
+    jQuery.get("https://fartuh.xyz/api/chat/online", function(data, status){
+        data = JSON.parse(data);
+        online = document.getElementsByClassName("online")[0];
+        online.innerHTML = "Онлайн пользователей: " + data.online;
+    });
+}
+
+online();
+
 setInterval(update, 2000);
+setInterval(online, 4000);
 
 function sent(){
     jQuery.post("https://fartuh.xyz/api/chat/index.php", {login: "<?= $_SESSION['login']?>", password: "<?= $_COOKIE['password']?>", text: document.getElementById("message").value}, function(data, status){
